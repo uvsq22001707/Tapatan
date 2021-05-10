@@ -50,6 +50,7 @@ class Jeu :
            (c1==3 and c2==6)or(c1==5 and c2==8)or(c1==6 and c2==7)or(c1==7 and c2==8): return True
         return False
     
+    
     def finished(self):#retourne 1 si l'humain gagne, 0 si c'est l'ordi, -1 dans les autres cas
         winner=-1
         gagne=[[0,3,6],[1,4,7],[2,5,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]]
