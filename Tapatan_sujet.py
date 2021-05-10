@@ -1,7 +1,30 @@
+#########################################
+#informations liées au groupe
+# groupe Miashs Td1 groupe 5
+# Gouyer Roxane
+# Alioune Ndiaye
+# Momar SAMBE
+# Maxime Jouan
+
+########################
+# import des librairies
+
 from tkinter import *
 from random import randint
+
+########################
+# Constantes
+
+
+######################
+# Variables globales
+
+    
+    
+######################   
     # Programme pour jouer au tapatan (jeu des neuf trous)
     # version 1: l'ordinateur choisit une place au hasard
+
 class Jeu :
     def __init__(self,mp=[-1,-1,-1],op=[-1,-1,-1],j=0):
         self.mesPlaces=[]
@@ -10,6 +33,7 @@ class Jeu :
         for i in range(3):
              self.mesPlaces.append(mp[i])
              self.ordiPlaces.append(op[i])
+    
     def voisin(self):#retourne une liste contenant [pion à bouger,place libre à occuper]
         voisin=[]
         for i in range(3):
@@ -18,12 +42,14 @@ class Jeu :
                     if self.joueur==1 and self.isVoisine(self.mesPlaces[i],j):voisin.append([i,j])
                     elif self.joueur==0 and self.isVoisine(self.ordiPlaces[i],j):voisin.append([i,j])
         return voisin
+    
     def isVoisine(self,c1,c2):
         if c1==4 or c2==4: return True
         if c1>c2:c1,c2=c2,c1
         if (c1==0 and (c2==1 or c2==3))or(c1==1 and c2==2)or(c1==2 and c2==5)or\
            (c1==3 and c2==6)or(c1==5 and c2==8)or(c1==6 and c2==7)or(c1==7 and c2==8): return True
         return False
+    
     def finished(self):#retourne 1 si l'humain gagne, 0 si c'est l'ordi, -1 dans les autres cas
         winner=-1
         gagne=[[0,3,6],[1,4,7],[2,5,8],[0,1,2],[3,4,5],[6,7,8],[0,4,8],[2,4,6]]
@@ -31,17 +57,26 @@ class Jeu :
         if sorted(self.ordiPlaces) in gagne: winner=0
         return winner 
 
+
+########################
+# fonctions
+
+
 def changeDebut():
     global coup,score,avertissement,previousChoix
     if coup!=0 and score!=[0,0]:
         avertissement=True
         fenMessage('Attention! Le score va être perdu...')
+
+
 def fenMessage(s):#bandeau d'avertissement
     global band,mess1,mess2
     band=cadre.create_rectangle(5,75,298,325,width=3,fill='light yellow')
     mess1=cadre.create_text(150,150,text=s,font="Arial 12",fill='red')
     mess2=cadre.create_text(150,250,text='Cliquer ici pour valider ce choix'\
                             ,font="Arial 11",fill='red')
+
+
 def eraseMessage():
     global coup,score,tour,band,mess1,mess2,avertissement
     score=[0,0]
@@ -52,6 +87,8 @@ def eraseMessage():
     cadre.delete(mess2)
     avertissement=False
     rejouer()
+
+
 def rejouer():
     global coup,resteAjouer,possible,debut,detectionPion,choixPion,mesPlaces\
            ,ordiPlaces,tour,gagnant,avertissement,band,mess1,mess2,previousChoix
@@ -75,6 +112,8 @@ def rejouer():
     message.configure(text="à {} de jouer".format(tour))
     if tour=="l'ordi": ordinateur()
     print('\nNouvelle partie')
+    
+
 def notGagne(j):
     global coup,gagnant
     if coup<5:return True
@@ -88,6 +127,8 @@ def notGagne(j):
               format(joueurDebut[gagnant*2],score[1],score[0]))
         return False
     return True
+
+
 def ordinateur():
     global coup,possible,tour,debut,ordiPlaces
     choixPion,choixPlace,anciennePlace=-1,-1,-1
@@ -114,6 +155,8 @@ def ordinateur():
         message.configure(text="à {} de jouer".format(tour))
     if not debut:
         possible[anciennePlace]=True #on libère une place
+
+
 def clic(event):
     global detectionPion,choixPion,xDeb,yDeb,gagnant,avertissement
     x1,y1,detectionPion=event.x,event.y,False
@@ -128,6 +171,8 @@ def clic(event):
                     break
                 detectionPion=True
                 break
+
+
 def drag(event):
     x1,y1=event.x,event.y
     if detectionPion:
@@ -136,6 +181,8 @@ def drag(event):
         if y1<50:y1=50
         if y1>350:x1=350
         cadre.coords(pion1[choixPion],x1,y1)
+
+
 def lache(event):
     global detectionPion,possible,choixPion,coup,tour,debut,mesPlaces,resteAjouer,xDeb,yDeb
     if detectionPion and gagnant==-1:
@@ -169,6 +216,8 @@ def lache(event):
         else:cadre.coords(pion1[choixPion],xDeb,yDeb)
         detectionPion=False
     #else:cadre.coords(pion1[choixPion],xDeb,yDeb)
+
+
 def tracePlateau():
     cadre.create_rectangle(50,100,250,300,width=5)
     cadre.create_line(50,100,250,300,width=5,fill='black')
@@ -182,6 +231,11 @@ def tracePlateau():
         cadre.create_oval(xt-7,yt-7,xt+7,yt+7,width=5,fill='black')
         cadre.create_oval(xt-3,yt-3,xt+3,yt+3,width=0,fill='light yellow')
      
+
+########################
+# programme principal
+
+
 fen=Tk()
 fen.title('Jeu des Neuf Trous')
 joueurDebut=["l'ordi","aléatoire","l'humain"]
