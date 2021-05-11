@@ -62,11 +62,8 @@ def clic(event):
                 break
 
 def test_clic(event):
-    for i in range(4,12):
-        xt,yt=i%3*100+50,i//3*100
-        pion1[i]=i*100+50,350
-        [xDeb,yDeb]=cadre.coords(pion1[i])
-        return (xt-xDeb)**2+(yt-yDeb)**2<400
+    if (event) 
+        return yes
 
     
 #def Clic(event):

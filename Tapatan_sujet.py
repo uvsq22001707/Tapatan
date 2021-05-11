@@ -9,7 +9,7 @@
 ########################
 # import des librairies
 
-from tkinter import *
+import tkinter as tk
 from random import randint
 
 ########################
@@ -18,9 +18,9 @@ from random import randint
 
 ######################
 # Variables globales
+global previousChoix
 
-    
-    
+
 ######################   
     # Programme pour jouer au tapatan (jeu des neuf trous)
     # version 1: l'ordinateur choisit une place au hasard
@@ -183,7 +183,8 @@ def drag(event):
         if y1>350:x1=350
         cadre.coords(pion1[choixPion],x1,y1)
 
-
+ #   pion0.append(cadre.create_image(i*100+50,50,image=photo1))
+ #   pion1.append(cadre.create_image(i*100+50,350,image=photo2))
 def lache(event):
     global detectionPion,possible,choixPion,coup,tour,debut,mesPlaces,resteAjouer,xDeb,yDeb
     if detectionPion and gagnant==-1:
@@ -236,32 +237,36 @@ def tracePlateau():
 ########################
 # programme principal
 
-
-fen=Tk()
+fen = tk.Tk()
 fen.title('Jeu des Neuf Trous')
 joueurDebut=["l'ordi","aléatoire","l'humain"]
 tour=joueurDebut[randint(0,1)*2]
-cadre=Canvas(fen,width=300,height=400,bg='light yellow')
+cadre= tk.Canvas(fen, bg='light yellow', width=300, height=400)
 cadre.grid(row=1,column=1,columnspan=3)
 cadre.bind("<Button-1>",clic)
 cadre.bind("<B1-Motion>",drag)
 cadre.bind("<ButtonRelease-1>",lache)
-ordiScore=Label(fen,text="0")
-ordiScore.grid(row=2,column=1)
-message=Label(fen,text="à {} de jouer".format(tour))
-message.grid(row=2,column=2)
-monScore=Label(fen,text="0")
-monScore.grid(row=2,column=3)
-choixDebut=IntVar()
-choixDebut.set(1)
-for i in range(3): # Création des trois 'boutons radio' :
-    bouton=Radiobutton(fen,text=joueurDebut[i],variable=choixDebut,
-                       value=i,command=changeDebut)
-    bouton.grid(row=3,column=i+1)
-bouton=Button(fen,text="Rejouer",command=rejouer)
-bouton.grid(row=4,column=1,columnspan=3)
-photo1=PhotoImage(file='buttonBleu.gif')     
-photo2=PhotoImage(file='buttonArcEnCiel.gif')
+#ordiScore=Label(fen,text="0")
+#ordiScore.grid(row=2,column=1)
+#message=Label(fen,text="à {} de jouer".format(tour))
+#message.grid(row=2,column=2)
+#monScore=Label(fen,text="0")
+#monScore.grid(row=2,column=3)
+#choixDebut=IntVar()
+#choixDebut.set(1)
+#for i in range(3): # Création des trois 'boutons radio' :
+#    bouton=Radiobutton(fen,text=joueurDebut[i],variable=choixDebut,
+#                       value=i,command=changeDebut)
+#    bouton.grid(row=3,column=i+1)
+#bouton=Button(fen,text="Rejouer",command=rejouer)
+#bouton.grid(row=4,column=1,columnspan=3)
+#photo1=PhotoImage(file="buttonBleu.gif")     
+#photo2=PhotoImage(file="buttonArcEnCiel.gif")
+photo1=cadre.create_oval(10,10,30,30,fill='blue')
+photo2=cadre.create_oval(10,10,30,30,fill='red')
+
+
+
 #initialisations des variables globales
 debut,detectionPion,avertissement=True,False,False
 possible,coup,score,resteAjouer=[],0,[0,0],[0,1,2]
@@ -272,8 +277,8 @@ for i in range(9): possible.append(True)
 pion0,pion1=[],[]
 tracePlateau()
 for i in range(3):# Création des six pions :
-    pion0.append(cadre.create_image(i*100+50,50,image=photo1))#ordi
-    pion1.append(cadre.create_image(i*100+50,350,image=photo2))#humain
+    pion0.append(photo1)#ordi
+    pion1.append(photo2)#humain
 if tour=="l'ordi": ordinateur()
 fen.mainloop()
 
