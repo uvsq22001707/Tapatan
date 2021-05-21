@@ -61,8 +61,9 @@ def clic(event):
                 detectionPion=True
                 break
 
-def test_clic(event):
-    if (event) 
+def test_clic(x, y):
+    x, y = i, j
+    if i == 4%3*100+50 and j == 4//3*100:
         return yes
 
     
