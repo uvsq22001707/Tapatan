@@ -13,7 +13,8 @@ from random import randint
 
 ########################
 # Constantes
-pion0,pion1=[],[]
+Hauteur = 400
+Largeur =300
 
 ######################
 # Variables globales
@@ -53,7 +54,7 @@ def clic(event):
     if avertissement and 0<x1<300 and 70<y1<330:
         for i in range(3):
             [xDeb,yDeb]=cadre.coords(pion1[i])
-            if (x1-xDeb)**2+(y1-yDeb)**2<400:#estimation du rayon du pion à 20
+            if (x1-xDeb)**2+(y1-yDeb)**2<400:
                 choixPion=i
                 if debut and resteAjouer.count(choixPion)==0 :
                     choixPion=-1
@@ -61,10 +62,30 @@ def clic(event):
                 detectionPion=True
                 break
 
-def test_clic(x, y):
-    x, y = i, j
-    if i == 4%3*100+50 and j == 4//3*100:
-        return yes
+def test_clic(event):
+    i, j = coord(event.x, event.y)
+    if i > 25 and i < 75 and j > 75 and j <125:
+        cadre.destroy()
+    if i > 125 and i < 175 and j > 75 and j <125:
+        cadre.destroy()
+    if i > 225 and i < 275 and j > 75 and j <125:
+        cadre.destroy()
+    if i > 25 and i < 75 and j > 175 and j <225:
+        cadre.destroy()
+    if i > 125 and i < 175 and j > 175 and j <225:
+        cadre.destroy()
+    if i > 225 and i < 275 and j > 175 and j <225:
+        cadre.destroy()
+    if i > 25 and i < 75 and j > 275 and j <325:
+        cadre.destroy()
+    if i > 125 and i < 175 and j > 275 and j <325:
+        cadre.destroy()
+    if i > 225 and i < 275 and j > 275 and j <325:
+        cadre.destroy()
+
+def coord(x, y):
+    return x , y
+
 
     
 #def Clic(event):
@@ -82,9 +103,9 @@ fen = tk.Tk()
 fen.title('Tapatan')
 joueurDebut=["Joueur 1","aléatoire","Joueur 2"]
 tour=joueurDebut[randint(0,1)*2]
-cadre= tk.Canvas(fen, bg='white', width=300, height=400)
+cadre= tk.Canvas(fen, bg='white', width=Largeur, height=Hauteur)
 cadre.grid(row=1,column=1,columnspan=3)
 cadre.bind("<Button-1>",test_clic)
 tracePlateau()
 cree_pion()
-fen.mainloop( )
+fen.mainloop()
