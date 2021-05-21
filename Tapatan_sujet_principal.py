@@ -16,6 +16,7 @@ from random import randint
 Hauteur = 400
 Largeur =300
 
+
 ######################
 # Variables globales
 
@@ -48,24 +49,12 @@ def tracePlateau():
         cadre.create_oval(xt-3,yt-3,xt+3,yt+3,width=0,fill='light yellow')
 
 
-def clic(event):
-    global detectionPion,choixPion,xDeb,yDeb,gagnant,avertissement
-    x1,y1,detectionPion=event.x,event.y,False
-    if avertissement and 0<x1<300 and 70<y1<330:
-        for i in range(3):
-            [xDeb,yDeb]=cadre.coords(pion1[i])
-            if (x1-xDeb)**2+(y1-yDeb)**2<400:
-                choixPion=i
-                if debut and resteAjouer.count(choixPion)==0 :
-                    choixPion=-1
-                    break
-                detectionPion=True
-                break
 
 def test_clic(event):
     i, j = coord(event.x, event.y)
     if i > 25 and i < 75 and j > 75 and j <125:
-        cadre.destroy()
+        if tableau == 0:
+            cadre.create_oval(25,75,75,125,width=0,fill='red')
     if i > 125 and i < 175 and j > 75 and j <125:
         cadre.destroy()
     if i > 225 and i < 275 and j > 75 and j <125:
@@ -87,22 +76,16 @@ def coord(x, y):
     return x , y
 
 
-    
-#def Clic(event):
-#    global a,C1,C2,C3,C1RC,C1R,C2RC,C2R,C3RC,C3R,L1RC,L1R,L2RC,L2R,L3RC,L3R,L1,L2,L3
-#X = event.x
-#Y = event.y
 
-#for i in range(9): possible.append(True)
-#if tour=="l'ordi": ordinateur()
+def place_pion():
+
+    
 
 
 ########################
 # programme principal
-fen = tk.Tk()
+fen = tk.TK()
 fen.title('Tapatan')
-joueurDebut=["Joueur 1","aléatoire","Joueur 2"]
-tour=joueurDebut[randint(0,1)*2]
 cadre= tk.Canvas(fen, bg='white', width=Largeur, height=Hauteur)
 cadre.grid(row=1,column=1,columnspan=3)
 cadre.bind("<Button-1>",test_clic)
