@@ -222,62 +222,149 @@ def test_clic(event):
     
 def var_rouge_bleu():
     global rouge_ou_bleu
-    if tour[0] ==7:
-        rouge_ou_bleu =[2]
+    rouge_ou_bleu =[2]
 
 
 def mouvement(event):
     i, j = coord(event.x, event.y)
+    global rouge_ou_bleu
+    global touche_ou_pas
     if partie_en_cours(piontableau) and prendre_poser[0] == 0 :
-        if i > 40 and i < 60 and j > 90 and j <110 and piontableau[0] != 1 and rouge_ou_bleu[0] == piontableau[0]:
+        if i > 40 and i < 60 and j > 90 and j <110  and rouge_ou_bleu[0] == piontableau[0]:
             cadre.create_oval(40,90,60,110,width=0,fill='black')
             cadre.create_oval(47,97,53,103,width=0,fill='white')
-            prendre_poser[0] = 1
-        if i > 140 and i < 160 and j > 90 and j <110 and piontableau[1] != 1 and rouge_ou_bleu == piontableau[1]:
+            piontableau[0]= 1
+            touche_ou_pas = 1 
+        
+        if i > 140 and i < 160 and j > 90 and j <110 and piontableau[1] != 1 and rouge_ou_bleu[0] == piontableau[1]:
             cadre.create_oval(140,90,160,110,width=0,fill='black')
             cadre.create_oval(147,97,153,103,width=0,fill='white')
-            prendre_poser[0] = 1
-        if i > 240 and i < 260 and j > 90 and j <110 and piontableau[2] != 1 and rouge_ou_bleu == piontableau[2]:
+            piontableau[1]=1
+            touche_ou_pas = 2
+        if i > 240 and i < 260 and j > 90 and j <110 and piontableau[2] != 1 and rouge_ou_bleu[0] == piontableau[2]:
             cadre.create_oval(240,90,260,110,width=0,fill='black')
             cadre.create_oval(247,97,253,103,width=0,fill='white')
-            prendre_poser[0] = 1
-        if i > 40 and i < 60 and j > 175 and j <210 and piontableau[3] != 1 and rouge_ou_bleu == piontableau[3]:
+            piontableau[2]=1
+            touche_ou_pas = 3
+        
+        if i > 40 and i < 60 and j > 175 and j <210 and piontableau[3] != 1 and rouge_ou_bleu[0] == piontableau[3]:
             cadre.create_oval(40,190,60,210,width=0,fill='black')
             cadre.create_oval(47,197,53,203,width=0,fill='white')
-            prendre_poser[0] = 1
-        if i > 140 and i < 160 and j > 190 and j <210 and piontableau[4] != 1 and rouge_ou_bleu == piontableau[4]:
+            piontableau[3]=1
+            touche_ou_pas = 4
+        if i > 140 and i < 160 and j > 190 and j <210 and piontableau[4] != 1 and rouge_ou_bleu[0] == piontableau[4]:
             cadre.create_oval(140,190,160,210,width=0,fill='black')
             cadre.create_oval(147,197,153,203,width=0,fill='white')
-            prendre_poser[0] = 1
-        if i > 240 and i < 260 and j > 190 and j <210 and piontableau[5] != 1 and rouge_ou_bleu == piontableau[5]:
+            piontableau[4]=1
+            touche_ou_pas = 9
+        
+        if i > 240 and i < 260 and j > 190 and j <210 and piontableau[5] != 1 and rouge_ou_bleu[0] == piontableau[5]:
             cadre.create_oval(240,190,260,210,width=0,fill='black')
             cadre.create_oval(247,197,253,203,width=0,fill='white')
-            prendre_poser[0] = 1
-        if 40 and i < 60 and j > 290 and j <310 and piontableau[6] != 1 and rouge_ou_bleu == piontableau[6]:
+            piontableau[5]=1
+            touche_ou_pas = 5
+        if 40 and i < 60 and j > 290 and j <310 and piontableau[6] != 1 and rouge_ou_bleu[0] == piontableau[6]:
             cadre.create_oval(40,290,60,310,width=0,fill='black')
             cadre.create_oval(47,297,53,303,width=0,fill='white')
-            prendre_poser[0] = 1
-        if i > 140 and i < 160 and j > 290 and j <310 and piontableau[7] != 1 and rouge_ou_bleu == piontableau[7]:
+            piontableau[6]=1
+            touche_ou_pas = 6
+        
+        if i > 140 and i < 160 and j > 290 and j <310 and piontableau[7] != 1 and rouge_ou_bleu[0] == piontableau[7]:
             cadre.create_oval(140,290,160,310,width=0,fill='black')
             cadre.create_oval(147,297,153,307,width=0,fill='white')
-            prendre_poser[0] = 1
-        if i > 240 and i < 260 and j > 290 and j <310 and piontableau[8] != 1 and rouge_ou_bleu == piontableau[8]:
+            piontableau[7]=1
+            touche_ou_pas = 7
+        
+        if i > 240 and i < 260 and j > 290 and j <310 and piontableau[8] != 1 and rouge_ou_bleu[0] == piontableau[8]:
             cadre.create_oval(240,290,260,310,width=0,fill='black')
             cadre.create_oval(247,297,253,307,width=0,fill='white')
-            prendre_poser[0] = 1
+            piontableau[8]=1
+            touche_ou_pas =8
+        prendre_poser[0] = 1
     elif partie_en_cours(piontableau) and prendre_poser[0] == 1 and tour[0]>=7:
-        if i > 40 and i < 60 and j > 90 and j <110 and piontableau[0] == 1:
+        if i > 40 and i < 60 and j > 90 and j <110 and piontableau[0] == 1 and (touche_ou_pas == 1 or touche_ou_pas == 2 or touche_ou_pas == 4 or touche_ou_pas == 9):
             if tour[0] %2 ==0:
                 cadre.create_oval(40,90,60,110,width=0,fill='blue')
+                piontableau[0] =3
             else:
                 cadre.create_oval(40,90,60,110,width=0,fill='red')
+                piontableau[0] =2
+            
+        if i > 140 and i < 160 and j > 90 and j <110 and piontableau[1] == 1 and (touche_ou_pas == 1 or touche_ou_pas == 2 or touche_ou_pas == 3 or touche_ou_pas == 9):
+            if tour[0] %2 ==0:
+                cadre.create_oval(140,90,160,110,width=0,fill='blue')
+                piontableau[1] =3
+            else:
+                cadre.create_oval(140,90,160,110,width=0,fill='red')
+                piontableau[1] =2
+        
+        if i > 240 and i < 260 and j > 90 and j <110 and piontableau[2]==1 and (touche_ou_pas == 2 or touche_ou_pas == 3 or touche_ou_pas == 5 or touche_ou_pas == 9):
+            if tour[0] %2 ==0:
+                cadre.create_oval(240,90,260,110,width=0,fill='blue')
+                piontableau[2] =3
+            else:
+                cadre.create_oval(240,90,260,110,width=0,fill='red')
+                piontableau[2] =2
+        
+        if i > 40 and i < 60 and j > 175 and j <210 and piontableau[3]==1 and (touche_ou_pas == 1 or touche_ou_pas == 4 or touche_ou_pas == 6 or touche_ou_pas == 9):
+            if tour[0] %2 ==0:
+                cadre.create_oval(40,190,60,210,width=0,fill='blue')
+                piontableau[3] =3
+            else:
+                cadre.create_oval(40,190,60,210,width=0,fill='red')
+                piontableau[3] =2
+
+        if i > 140 and i < 160 and j > 190 and j <210 and piontableau[4]==1:
+            if tour[0] %2 ==0:
+                cadre.create_oval(140,190,160,210,width=0,fill='blue')
+                piontableau[4] =3
+            else:
+                cadre.create_oval(140,190,160,210,width=0,fill='red')
+                piontableau[4] =2
+        
+        if i > 240 and i < 260 and j > 190 and j <210 and piontableau[5]==1 and (touche_ou_pas == 3 or touche_ou_pas == 5 or touche_ou_pas == 8 or touche_ou_pas == 9):
+            if tour[0] %2 ==0:
+                cadre.create_oval(240,190,260,210,width=0,fill='blue')
+                piontableau[5] =3
+            else:
+                cadre.create_oval(240,190,260,210,width=0,fill='red')
+                piontableau[5] =2
+
+        if 40 and i < 60 and j > 290 and j <310 and piontableau[6]== 1 and (touche_ou_pas == 4 or touche_ou_pas == 6 or touche_ou_pas == 7 or touche_ou_pas == 9):
+            if tour[0] %2 ==0:
+                cadre.create_oval(40,290,60,310,width=0,fill='blue')
+                piontableau[6] =3
+            else:
+                cadre.create_oval(40,290,60,310,width=0,fill='red')
+                piontableau[6] =2
+
+        if i > 140 and i < 160 and j > 290 and j <310 and piontableau[7]== 1 and (touche_ou_pas == 6 or touche_ou_pas == 7 or touche_ou_pas == 8 or touche_ou_pas == 9):
+            if tour[0] %2 ==0:
+                cadre.create_oval(140,290,160,310,width=0,fill='blue')
+                piontableau[7] =3
+            else:
+                cadre.create_oval(140,290,160,310,width=0,fill='red')
+                piontableau[7] =2
+        
+        if i > 240 and i < 260 and j > 290 and j <310 and piontableau[8]== 1 and( touche_ou_pas == 5 or touche_ou_pas == 7 or touche_ou_pas == 8 or touche_ou_pas == 9):
+            if tour[0] %2 ==0:
+                cadre.create_oval(240,290,260,310,width=0,fill='blue')
+                piontableau[8] =3
+            else:
+                cadre.create_oval(240,290,260,310,width=0,fill='red')
+                piontableau[8] =2
         if rouge_ou_bleu[0] == 2:
-            rouge_ou_bleu = 3
+            rouge_ou_bleu[0] = 3
         elif rouge_ou_bleu[0] == 3:
-            rouge_ou_bleu =2
+            rouge_ou_bleu[0] =2
         prendre_poser[0]=0
         tour[0] += 1
     print(rouge_ou_bleu)
+    print(piontableau)
+    print(touche_ou_pas)
+
+
+
 def cree_pion():
     for i in range(3):
         xt,yt=i%3*100+50,i//3*100
@@ -364,13 +451,17 @@ def manche_deplacement(event):
                 print("le joueur bleu à gagné")
 
 
-
+def rond_qui_touche():
+    global touche_ou_pas
+    touche_ou_pas = 0
 ########################
 # programme principal
 fen = tk.Tk()
 fen.title('Tapatan')
 cadre= tk.Canvas(fen, bg='white', width=Largeur, height=Hauteur)
 cadre.grid(row=1,column=1,columnspan=3)
+rond_qui_touche()
+tour_joueur()
 var_rouge_bleu()
 tracePlateau()
 cree_pion()
