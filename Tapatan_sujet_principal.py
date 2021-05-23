@@ -220,43 +220,48 @@ def test_clic(event):
     print(tour[0]%2)
     print(piontableau)
     
+def var_rouge_bleu():
+    global rouge_ou_bleu
+    if tour[0] ==7:
+        rouge_ou_bleu =[2]
+
 
 def mouvement(event):
     i, j = coord(event.x, event.y)
     if partie_en_cours(piontableau) and prendre_poser[0] == 0 :
-        if i > 40 and i < 60 and j > 90 and j <110 and piontableau[0] != 1:
+        if i > 40 and i < 60 and j > 90 and j <110 and piontableau[0] != 1 and rouge_ou_bleu[0] == piontableau[0]:
             cadre.create_oval(40,90,60,110,width=0,fill='black')
             cadre.create_oval(47,97,53,103,width=0,fill='white')
             prendre_poser[0] = 1
-        elif i > 140 and i < 160 and j > 90 and j <110 and piontableau[1] != 1 :
+        if i > 140 and i < 160 and j > 90 and j <110 and piontableau[1] != 1 and rouge_ou_bleu == piontableau[1]:
             cadre.create_oval(140,90,160,110,width=0,fill='black')
             cadre.create_oval(147,97,153,103,width=0,fill='white')
             prendre_poser[0] = 1
-        elif i > 240 and i < 260 and j > 90 and j <110 and piontableau[2] != 1:
+        if i > 240 and i < 260 and j > 90 and j <110 and piontableau[2] != 1 and rouge_ou_bleu == piontableau[2]:
             cadre.create_oval(240,90,260,110,width=0,fill='black')
             cadre.create_oval(247,97,253,103,width=0,fill='white')
             prendre_poser[0] = 1
-        elif i > 40 and i < 60 and j > 175 and j <210 and piontableau[3] != 1:
+        if i > 40 and i < 60 and j > 175 and j <210 and piontableau[3] != 1 and rouge_ou_bleu == piontableau[3]:
             cadre.create_oval(40,190,60,210,width=0,fill='black')
             cadre.create_oval(47,197,53,203,width=0,fill='white')
             prendre_poser[0] = 1
-        elif i > 140 and i < 160 and j > 190 and j <210 and piontableau[4] != 1 :
+        if i > 140 and i < 160 and j > 190 and j <210 and piontableau[4] != 1 and rouge_ou_bleu == piontableau[4]:
             cadre.create_oval(140,190,160,210,width=0,fill='black')
             cadre.create_oval(147,197,153,203,width=0,fill='white')
             prendre_poser[0] = 1
-        elif i > 240 and i < 260 and j > 190 and j <210 and piontableau[5] != 1 :
+        if i > 240 and i < 260 and j > 190 and j <210 and piontableau[5] != 1 and rouge_ou_bleu == piontableau[5]:
             cadre.create_oval(240,190,260,210,width=0,fill='black')
             cadre.create_oval(247,197,253,203,width=0,fill='white')
             prendre_poser[0] = 1
-        elif 40 and i < 60 and j > 290 and j <310 and piontableau[6] != 1 :
+        if 40 and i < 60 and j > 290 and j <310 and piontableau[6] != 1 and rouge_ou_bleu == piontableau[6]:
             cadre.create_oval(40,290,60,310,width=0,fill='black')
             cadre.create_oval(47,297,53,303,width=0,fill='white')
             prendre_poser[0] = 1
-        elif i > 140 and i < 160 and j > 290 and j <310 and piontableau[7] != 1 :
+        if i > 140 and i < 160 and j > 290 and j <310 and piontableau[7] != 1 and rouge_ou_bleu == piontableau[7]:
             cadre.create_oval(140,290,160,310,width=0,fill='black')
             cadre.create_oval(147,297,153,307,width=0,fill='white')
             prendre_poser[0] = 1
-        elif i > 240 and i < 260 and j > 290 and j <310 and piontableau[8] != 1 :
+        if i > 240 and i < 260 and j > 290 and j <310 and piontableau[8] != 1 and rouge_ou_bleu == piontableau[8]:
             cadre.create_oval(240,290,260,310,width=0,fill='black')
             cadre.create_oval(247,297,253,307,width=0,fill='white')
             prendre_poser[0] = 1
@@ -266,8 +271,13 @@ def mouvement(event):
                 cadre.create_oval(40,90,60,110,width=0,fill='blue')
             else:
                 cadre.create_oval(40,90,60,110,width=0,fill='red')
-
-
+        if rouge_ou_bleu[0] == 2:
+            rouge_ou_bleu = 3
+        elif rouge_ou_bleu[0] == 3:
+            rouge_ou_bleu =2
+        prendre_poser[0]=0
+        tour[0] += 1
+    print(rouge_ou_bleu)
 def cree_pion():
     for i in range(3):
         xt,yt=i%3*100+50,i//3*100
@@ -353,12 +363,15 @@ def manche_deplacement(event):
             else:
                 print("le joueur bleu à gagné")
 
+
+
 ########################
 # programme principal
 fen = tk.Tk()
 fen.title('Tapatan')
 cadre= tk.Canvas(fen, bg='white', width=Largeur, height=Hauteur)
 cadre.grid(row=1,column=1,columnspan=3)
+var_rouge_bleu()
 tracePlateau()
 cree_pion()
 tour_joueur()
