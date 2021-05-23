@@ -15,6 +15,7 @@ from random import randint
 # Constantes
 Hauteur = 400
 Largeur =300
+
 ######################
 # Variables globale
 
@@ -220,6 +221,51 @@ def test_clic(event):
     print(piontableau)
     
 
+def mouvement(event):
+    i, j = coord(event.x, event.y)
+    if partie_en_cours(piontableau) and prendre_poser[0] == 0 :
+        if i > 40 and i < 60 and j > 90 and j <110 and piontableau[0] != 1:
+            cadre.create_oval(40,90,60,110,width=0,fill='black')
+            cadre.create_oval(47,97,53,103,width=0,fill='white')
+            prendre_poser[0] = 1
+        elif i > 140 and i < 160 and j > 90 and j <110 and piontableau[1] != 1 :
+            cadre.create_oval(140,90,160,110,width=0,fill='black')
+            cadre.create_oval(147,97,153,103,width=0,fill='white')
+            prendre_poser[0] = 1
+        elif i > 240 and i < 260 and j > 90 and j <110 and piontableau[2] != 1:
+            cadre.create_oval(240,90,260,110,width=0,fill='black')
+            cadre.create_oval(247,97,253,103,width=0,fill='white')
+            prendre_poser[0] = 1
+        elif i > 40 and i < 60 and j > 175 and j <210 and piontableau[3] != 1:
+            cadre.create_oval(40,190,60,210,width=0,fill='black')
+            cadre.create_oval(47,197,53,203,width=0,fill='white')
+            prendre_poser[0] = 1
+        elif i > 140 and i < 160 and j > 190 and j <210 and piontableau[4] != 1 :
+            cadre.create_oval(140,190,160,210,width=0,fill='black')
+            cadre.create_oval(147,197,153,203,width=0,fill='white')
+            prendre_poser[0] = 1
+        elif i > 240 and i < 260 and j > 190 and j <210 and piontableau[5] != 1 :
+            cadre.create_oval(240,190,260,210,width=0,fill='black')
+            cadre.create_oval(247,197,253,203,width=0,fill='white')
+            prendre_poser[0] = 1
+        elif 40 and i < 60 and j > 290 and j <310 and piontableau[6] != 1 :
+            cadre.create_oval(40,290,60,310,width=0,fill='black')
+            cadre.create_oval(47,297,53,303,width=0,fill='white')
+            prendre_poser[0] = 1
+        elif i > 140 and i < 160 and j > 290 and j <310 and piontableau[7] != 1 :
+            cadre.create_oval(140,290,160,310,width=0,fill='black')
+            cadre.create_oval(147,297,153,307,width=0,fill='white')
+            prendre_poser[0] = 1
+        elif i > 240 and i < 260 and j > 290 and j <310 and piontableau[8] != 1 :
+            cadre.create_oval(240,290,260,310,width=0,fill='black')
+            cadre.create_oval(247,297,253,307,width=0,fill='white')
+            prendre_poser[0] = 1
+    elif partie_en_cours(piontableau) and prendre_poser[0] == 1 and tour[0]>=7:
+        if i > 40 and i < 60 and j > 90 and j <110 and piontableau[0] == 1:
+            if tour[0] %2 ==0:
+                cadre.create_oval(40,90,60,110,width=0,fill='blue')
+            else:
+                cadre.create_oval(40,90,60,110,width=0,fill='red')
 
 
 def cree_pion():
@@ -257,7 +303,9 @@ def pion_existant():
     global piontableau
     piontableau = [1,1,1,1,1,1,1,1,1]
 
-
+def moment_clic():
+    global prendre_poser
+    prendre_poser = [0]
 
 
 def partie_en_cours(piontableau):
@@ -280,9 +328,9 @@ def partie_en_cours(piontableau):
     else:
         return True
 
-def manche(event):
+def manche_placement(event):
     i, j = coord(event.x, event.y)
-    if partie_en_cours(piontableau):
+    if partie_en_cours(piontableau) and tour[0]<7:
         test_clic(event)
         if partie_en_cours(piontableau):
             return
@@ -293,7 +341,18 @@ def manche(event):
                 print("le joueur bleu à gagné")
         
 
-def gagnant_bleu():       
+def manche_deplacement(event):
+    i, j = coord(event.x, event.y)
+    if partie_en_cours(piontableau) and tour[0]>=7:
+        mouvement(event)
+        if partie_en_cours(piontableau):
+            return
+        else:
+            if tour[0] %2 ==0:
+                print("le joueur rouge à gagné")
+            else:
+                print("le joueur bleu à gagné")
+
 ########################
 # programme principal
 fen = tk.Tk()
@@ -304,5 +363,7 @@ tracePlateau()
 cree_pion()
 tour_joueur()
 pion_existant()
-cadre.bind("<Button-1>",manche)
+moment_clic()
+cadre.bind("<Button-1>",manche_placement)
+cadre.bind("<Button-3>",manche_deplacement)
 fen.mainloop()
