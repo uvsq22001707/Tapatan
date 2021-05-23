@@ -5,7 +5,7 @@
 # Alioune Ndiaye
 # Momar SAMBE
 # Maxime Jouan
-
+#Pote Die
 ########################
 # import des librairies
 import tkinter as tk
@@ -16,7 +16,7 @@ from random import randint
 Hauteur = 400
 Largeur =300
 ######################
-# Variables globales
+# Variables globale
 
 
 
@@ -216,8 +216,9 @@ def test_clic(event):
                     cadre.create_oval(245,345,255,355,width=0,fill='white')
                 piontableau[8] = 3
             tour[0] += 1
-    print(tour)
+    print(tour[0]%2)
     print(piontableau)
+    
 
 
 
@@ -256,6 +257,9 @@ def pion_existant():
     global piontableau
     piontableau = [1,1,1,1,1,1,1,1,1]
 
+
+
+
 def partie_en_cours(piontableau):
     if piontableau[0] == piontableau[1] and piontableau[1] == piontableau[2] and piontableau[0] != 1 :
         return False
@@ -273,10 +277,23 @@ def partie_en_cours(piontableau):
         return False
     elif piontableau[2] == piontableau[4] and piontableau[4] == piontableau[6] and piontableau[2] != 1:
         return False
-    return True
+    else:
+        return True
 
+def manche(event):
+    i, j = coord(event.x, event.y)
+    if partie_en_cours(piontableau):
+        test_clic(event)
+        if partie_en_cours(piontableau):
+            return
+        else:
+            if tour[0] %2 ==0:
+                print("le joueur rouge à gagné")
+            else:
+                print("le joueur bleu à gagné")
+        
 
-
+def gagnant_bleu():       
 ########################
 # programme principal
 fen = tk.Tk()
@@ -287,5 +304,5 @@ tracePlateau()
 cree_pion()
 tour_joueur()
 pion_existant()
-cadre.bind("<Button-1>",test_clic)
+cadre.bind("<Button-1>",manche)
 fen.mainloop()
