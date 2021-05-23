@@ -46,7 +46,7 @@ def tracePlateau():
         cadre.create_oval(xt-7,yt-7,xt+7,yt+7,width=5,fill='black')
         cadre.create_oval(xt-3,yt-3,xt+3,yt+3,width=0,fill='light yellow')
 
-
+'''
 def clic(event):
     global detectionPion,choixPion,xDeb,yDeb,gagnant,avertissement
     x1,y1,detectionPion=event.x,event.y,False
@@ -60,7 +60,7 @@ def clic(event):
                     break
                 detectionPion=True
                 break
-
+'''
 def test_clic(event):
     for i in range(4,12):
         xt,yt=i%3*100+50,i//3*100
