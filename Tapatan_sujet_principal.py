@@ -10,6 +10,7 @@
 # import des librairies
 import tkinter as tk
 from random import randint
+from tkinter.ttk import Label
 
 ########################
 # Constantes
@@ -217,7 +218,7 @@ def test_clic(event):
                     cadre.create_oval(245,345,255,355,width=0,fill='white')
                 piontableau[8] = 3
             tour[0] += 1
-    print(tour[0]%2)
+    print(tour[0])
     print(piontableau)
     
 def var_rouge_bleu():
@@ -432,11 +433,7 @@ def manche_placement(event):
         if partie_en_cours(piontableau):
             return
         else:
-            if tour[0] %2 ==0:
-                print("le joueur rouge à gagné")
-            else:
-                print("le joueur bleu à gagné")
-        
+            recommencer_une_manche()
 
 def manche_deplacement(event):
     i, j = coord(event.x, event.y)
@@ -445,25 +442,117 @@ def manche_deplacement(event):
         if partie_en_cours(piontableau):
             return
         else:
-            if tour[0] %2 ==0:
-                print("le joueur rouge à gagné")
-            else:
-                print("le joueur bleu à gagné")
+            recommencer_une_manche()
+
+
+def recommencer_une_manche():
+    global nombre_manche
+    global score1
+    global score2
+    if tour[0] %2 ==0:
+        if nombre_manche ==1 or nombre_manche ==3 or nombre_manche == 5:
+            score1 +=1
+        else:
+            print("le joueur 2 gagné")
+            score2 += 1
+    else:
+        if nombre_manche ==2 or nombre_manche ==4 or nombre_manche == 6:
+            print("le joueur 1 à gagné")
+            score1 += 1
+        else:
+            print("le joueur 2 gagné")
+            score2 += 1
+    if score1 ==3:
+        label = Label(cadre, text='victoire du joueur 1')
+        label.pack(ipadx=20, ipady=20)
+    elif score2==3:
+        label = Label(cadre, text='victoire du joueur 2')
+        label.pack(ipadx=20, ipady=20)
+    else:
+        cadre.create_rectangle(0,0,300,400,width=0,fill='white')
+        fonct_aff_score()
+        tracePlateau()
+        cree_pion()
+        tour[0]= 1
+        nombre_manche += 1
+        global piontableau
+        piontableau = [1,1,1,1,1,1,1,1,1]
+
 
 
 def rond_qui_touche():
     global touche_ou_pas
     touche_ou_pas = 0
+
+def score_joueur():
+    global score1
+    global score2
+    global nombre_manche
+    nombre_manche = 1
+    score1 = 0
+    score2 = 0
+
+def fonc_label():
+    score1 = tk.StringVar()
+    aff2 = tk.StringVar()
+    label2 = Label(cadre2, text = 'le score du joueur 1 est de')
+    label2.pack(ipadx=20, ipady=20)
+    label2 = Label(cadre3, text = 'le score du joueur 2 est de')
+    label2.pack(ipadx=20, ipady=20)
+
+
+def fonct_aff_score():
+    if score1 ==0:
+        cadre4=tk.Canvas(fen, bg='white', width=20, height=20)
+        cadre4.grid(row=2,column=1,columnspan=1)
+        cadre4.create_text(10,10,text=0)
+    if score1 ==1:
+        cadre4=tk.Canvas(fen, bg='white', width=20, height=20)
+        cadre4.grid(row=2,column=1,columnspan=1)
+        cadre4.create_text(10,10,text=1)
+    if score1 ==2:
+        cadre4=tk.Canvas(fen, bg='white', width=20, height=20)
+        cadre4.grid(row=2,column=1,columnspan=1)
+        cadre4.create_text(10,10,text=2)
+    if score1 ==3:
+        cadre4=tk.Canvas(fen, bg='white', width=20, height=20)
+        cadre4.grid(row=2,column=1,columnspan=1)
+        cadre4.create_text(10,10,text=3)
+    if score2 ==0:
+        cadre4=tk.Canvas(fen, bg='white', width=20, height=20)
+        cadre4.grid(row=2,column=1,columnspan=3)
+        cadre4.create_text(10,10,text=0)
+    if score2 ==1:
+        cadre4=tk.Canvas(fen, bg='white', width=20, height=20)
+        cadre4.grid(row=2,column=1,columnspan=3)
+        cadre4.create_text(10,10,text=1)
+    if score2 ==2:
+        cadre4=tk.Canvas(fen, bg='white', width=20, height=20)
+        cadre4.grid(row=2,column=1,columnspan=3)
+        cadre4.create_text(10,10,text=2)
+    if score2 ==3:
+        cadre4=tk.Canvas(fen, bg='white', width=20, height=20)
+        cadre4.grid(row=2,column=1,columnspan=3)
+        cadre4.create_text(10,10,text=3)
+
+
+
 ########################
 # programme principal
 fen = tk.Tk()
 fen.title('Tapatan')
 cadre= tk.Canvas(fen, bg='white', width=Largeur, height=Hauteur)
-cadre.grid(row=1,column=1,columnspan=3)
+cadre.grid(row=5,column=1,columnspan=3)
+cadre2=tk.Canvas(fen, bg='white', width=50, height=50)
+cadre3=tk.Canvas(fen, bg='white', width=50, height=50)
+cadre2.grid(row=1,column=1,columnspan=1)
+cadre3.grid(row=1,column=3,columnspan=1)
 rond_qui_touche()
-tour_joueur()
+score_joueur()
+fonc_label()
 var_rouge_bleu()
 tracePlateau()
+fonct_aff_score()
 cree_pion()
 tour_joueur()
 pion_existant()
