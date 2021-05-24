@@ -349,7 +349,7 @@ def mouvement(event):                        #fonction utilisé pour déplacer u
             else:
                 cadre.create_oval(240,190,260,210,width=0,fill='red')
                 piontableau[5] =2
-        if 40 and i < 60 and j > 290 and j <310 and piontableau[6]== 1 and (touche_ou_pas == 4 or touche_ou_pas == 6 or touche_ou_pas == 7 or touche_ou_pas == 9):
+        if i > 40 and i < 60 and j > 290 and j <310 and piontableau[6]== 1 and (touche_ou_pas == 4 or touche_ou_pas == 6 or touche_ou_pas == 7 or touche_ou_pas == 9):
             if tour[0] %2 ==0:
                 cadre.create_oval(40,290,60,310,width=0,fill='blue')
                 piontableau[6] =3
@@ -436,6 +436,7 @@ def recommencer_une_manche():                                #fonction de fin de
         else:
             print("le joueur 2 gagné")
             score2 += 1
+    fonct_aff_score()
     if score1 ==3:
         label = Label(cadre, text='Victoire du Joueur 1')
         label.pack(ipadx=20, ipady=20)
@@ -540,7 +541,6 @@ rond_qui_touche()
 score_joueur()
 var_rouge_bleu()
 tracePlateau()
-fonct_aff_score()
 cree_pion()
 tour_joueur()
 pion_existant()
