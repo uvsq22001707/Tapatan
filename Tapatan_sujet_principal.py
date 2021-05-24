@@ -25,10 +25,40 @@ Largeur =300
 ########################
 # fonctions
 
-def test_clic(event):
+
+def tracePlateau():                           #fonction qui va tracer le plateau
+    cadre.create_rectangle(50,100,250,300,width=5)
+    cadre.create_line(50,100,250,300,width=5,fill='black')
+    cadre.create_line(50,300,250,100,width=5,fill='black')
+    cadre.create_line(50,200,250,200,width=5,fill='black')
+    cadre.create_line(150,100,150,300,width=5,fill='black')
+    for i in range(15):
+        xt,yt=i%3*100+50,i//3*100
+        if i<3:yt+=50
+        if i>11:yt-=50
+        cadre.create_oval(xt-7,yt-7,xt+7,yt+7,width=5,fill='black')
+        cadre.create_oval(xt-3,yt-3,xt+3,yt+3,width=0,fill='light yellow')
+
+
+def cree_pion():                                 #fonction qui va créé les pions à leurs points de départs
+    for i in range(3):
+        xt,yt=i%3*100+50,i//3*100
+        if i<3:yt+=50
+        cadre.create_oval(xt-3,yt-3,xt+3,yt+3,width=0,fill='red')
+    for i in range(12,15):
+        xt,yt=i%3*100+50,i//3*100
+        if i>11:yt-=50
+        cadre.create_oval(xt-3,yt-3,xt+3,yt+3,width=0,fill='blue')
+
+
+def coord(x, y):    #fonction détectant les clics de la souris
+    return x , y
+
+
+def test_clic(event):                                                          #fonction pour placer un pion en fonction du clic.
     i, j = coord(event.x, event.y)
     if partie_en_cours(piontableau):
-        if i > 40 and i < 60 and j > 90 and j <110 and piontableau[0] == 1:
+        if i > 40 and i < 60 and j > 90 and j <110 and piontableau[0] == 1:          #emplacement pion 1
             if tour[0] == 1 or tour[0] == 3 or tour[0] ==5:
                 cadre.create_oval(40,90,60,110,width=0,fill='red')
                 if tour[0] == 1:
@@ -50,7 +80,7 @@ def test_clic(event):
             tour[0] += 1
             
     
-        if i > 140 and i < 160 and j > 90 and j <110 and piontableau[1] == 1:
+        if i > 140 and i < 160 and j > 90 and j <110 and piontableau[1] == 1:      #emplacement pion 2
             if tour[0] == 1 or tour[0] == 3 or tour[0] == 5:
                 cadre.create_oval(140,90,160,110,width=0,fill='red')
                 if tour[0] == 1:
@@ -71,7 +101,7 @@ def test_clic(event):
                 piontableau[1] = 3
             tour[0] += 1
         
-        if i > 240 and i < 260 and j > 90 and j <110 and piontableau[2] == 1:
+        if i > 240 and i < 260 and j > 90 and j <110 and piontableau[2] == 1:       #emplacement pion 3
             if tour[0] == 1 or tour[0] == 3 or  tour[0] == 5:
                 cadre.create_oval(240,90,260,110,width=0,fill='red')
                 if tour[0] == 1:
@@ -92,7 +122,7 @@ def test_clic(event):
                 piontableau[2] = 3
             tour[0] += 1
     
-        if i > 40 and i < 60 and j > 175 and j <210 and piontableau[3] == 1:
+        if i > 40 and i < 60 and j > 175 and j <210 and piontableau[3] == 1:       #emplacement pion  4
             if tour[0] == 1 or tour[0] == 3 or tour[0] == 5:
                 cadre.create_oval(40,190,60,210,width=0,fill='red')
                 if tour[0]==1:
@@ -113,7 +143,7 @@ def test_clic(event):
                 piontableau[3] = 3
             tour[0] += 1
     
-        if i > 140 and i < 160 and j > 190 and j <210 and piontableau[4] == 1:
+        if i > 140 and i < 160 and j > 190 and j <210 and piontableau[4] == 1:        #emplacement pion  5
             if tour[0] == 1 or tour[0] == 3 or tour[0] == 5:
                 cadre.create_oval(140,190,160,210,width=0,fill='red')
                 if tour[0]==1:
@@ -135,7 +165,7 @@ def test_clic(event):
             tour[0] += 1
     
     
-        if i > 240 and i < 260 and j > 190 and j <210 and piontableau[5] == 1:
+        if i > 240 and i < 260 and j > 190 and j <210 and piontableau[5] == 1:          #emplacement pion 6
             if tour[0] == 1 or tour[0] == 3  or tour[0] == 5:
                 cadre.create_oval(240,190,260,210,width=0,fill='red')
                 if tour[0] == 1:
@@ -156,7 +186,7 @@ def test_clic(event):
                 piontableau[5] = 3
             tour[0] += 1
         
-        if i > 40 and i < 60 and j > 290 and j <310 and piontableau[6] == 1:
+        if i > 40 and i < 60 and j > 290 and j <310 and piontableau[6] == 1:             #emplacement pion 7
             if tour[0] == 1 or tour[0] == 3 or tour[0] == 5:
                 cadre.create_oval(40,290,60,310,width=0,fill='red')
                 if tour[0] == 1:
@@ -177,7 +207,7 @@ def test_clic(event):
                 piontableau[6] = 3
             tour[0] += 1
         
-        if i > 140 and i < 160 and j > 290 and j <310 and piontableau[7] == 1:
+        if i > 140 and i < 160 and j > 290 and j <310 and piontableau[7] == 1:            #emplacement pion 8
             if tour[0] == 1 or tour[0] == 3 or tour[0] == 5:
                cadre.create_oval(140,290,160,310,width=0,fill='red')
                if tour[0] ==1:
@@ -198,7 +228,7 @@ def test_clic(event):
                 piontableau[7] = 3
             tour[0] += 1
     
-        if i > 240 and i < 260 and j > 290 and j <310 and piontableau[8] == 1:
+        if i > 240 and i < 260 and j > 290 and j <310 and piontableau[8] == 1:            #emplacement pion 9
             if tour[0] == 1 or tour[0] == 3 or tour[0] == 5:
                 cadre.create_oval(240,290,260,310,width=0,fill='red')
                 if tour[0] == 1:
@@ -218,19 +248,13 @@ def test_clic(event):
                     cadre.create_oval(245,345,255,355,width=0,fill='white')
                 piontableau[8] = 3
             tour[0] += 1
-    print(tour[0])
-    print(piontableau)
-    
-def var_rouge_bleu():
-    global rouge_ou_bleu
-    rouge_ou_bleu =[2]
 
 
-def mouvement(event):
+def mouvement(event):                        #fonction utilisé pour déplacer un pion
     i, j = coord(event.x, event.y)
     global rouge_ou_bleu
     global touche_ou_pas
-    if partie_en_cours(piontableau) and prendre_poser[0] == 0 :
+    if partie_en_cours(piontableau) and prendre_poser[0] == 0 :                                      #partie pour prendre le pion
         if i > 40 and i < 60 and j > 90 and j <110  and rouge_ou_bleu[0] == piontableau[0]:
             cadre.create_oval(40,90,60,110,width=0,fill='black')
             cadre.create_oval(47,97,53,103,width=0,fill='white')
@@ -264,7 +288,7 @@ def mouvement(event):
             cadre.create_oval(247,197,253,203,width=0,fill='white')
             piontableau[5]=1
             touche_ou_pas = 5
-        if 40 and i < 60 and j > 290 and j <310 and piontableau[6] != 1 and rouge_ou_bleu[0] == piontableau[6]:
+        if i > 40 and i < 60 and j > 290 and j <310 and piontableau[6] != 1 and rouge_ou_bleu[0] == piontableau[6]:
             cadre.create_oval(40,290,60,310,width=0,fill='black')
             cadre.create_oval(47,297,53,303,width=0,fill='white')
             piontableau[6]=1
@@ -282,7 +306,7 @@ def mouvement(event):
             piontableau[8]=1
             touche_ou_pas =8
         prendre_poser[0] = 1
-    elif partie_en_cours(piontableau) and prendre_poser[0] == 1 and tour[0]>=7:
+    elif partie_en_cours(piontableau) and prendre_poser[0] == 1 and tour[0]>=7:                                 #partie pour déposer le pion
         if i > 40 and i < 60 and j > 90 and j <110 and piontableau[0] == 1 and (touche_ou_pas == 1 or touche_ou_pas == 2 or touche_ou_pas == 4 or touche_ou_pas == 9):
             if tour[0] %2 ==0:
                 cadre.create_oval(40,90,60,110,width=0,fill='blue')
@@ -290,7 +314,6 @@ def mouvement(event):
             else:
                 cadre.create_oval(40,90,60,110,width=0,fill='red')
                 piontableau[0] =2
-            
         if i > 140 and i < 160 and j > 90 and j <110 and piontableau[1] == 1 and (touche_ou_pas == 1 or touche_ou_pas == 2 or touche_ou_pas == 3 or touche_ou_pas == 9):
             if tour[0] %2 ==0:
                 cadre.create_oval(140,90,160,110,width=0,fill='blue')
@@ -298,7 +321,6 @@ def mouvement(event):
             else:
                 cadre.create_oval(140,90,160,110,width=0,fill='red')
                 piontableau[1] =2
-        
         if i > 240 and i < 260 and j > 90 and j <110 and piontableau[2]==1 and (touche_ou_pas == 2 or touche_ou_pas == 3 or touche_ou_pas == 5 or touche_ou_pas == 9):
             if tour[0] %2 ==0:
                 cadre.create_oval(240,90,260,110,width=0,fill='blue')
@@ -306,7 +328,6 @@ def mouvement(event):
             else:
                 cadre.create_oval(240,90,260,110,width=0,fill='red')
                 piontableau[2] =2
-        
         if i > 40 and i < 60 and j > 175 and j <210 and piontableau[3]==1 and (touche_ou_pas == 1 or touche_ou_pas == 4 or touche_ou_pas == 6 or touche_ou_pas == 9):
             if tour[0] %2 ==0:
                 cadre.create_oval(40,190,60,210,width=0,fill='blue')
@@ -314,7 +335,6 @@ def mouvement(event):
             else:
                 cadre.create_oval(40,190,60,210,width=0,fill='red')
                 piontableau[3] =2
-
         if i > 140 and i < 160 and j > 190 and j <210 and piontableau[4]==1:
             if tour[0] %2 ==0:
                 cadre.create_oval(140,190,160,210,width=0,fill='blue')
@@ -322,7 +342,6 @@ def mouvement(event):
             else:
                 cadre.create_oval(140,190,160,210,width=0,fill='red')
                 piontableau[4] =2
-        
         if i > 240 and i < 260 and j > 190 and j <210 and piontableau[5]==1 and (touche_ou_pas == 3 or touche_ou_pas == 5 or touche_ou_pas == 8 or touche_ou_pas == 9):
             if tour[0] %2 ==0:
                 cadre.create_oval(240,190,260,210,width=0,fill='blue')
@@ -330,7 +349,6 @@ def mouvement(event):
             else:
                 cadre.create_oval(240,190,260,210,width=0,fill='red')
                 piontableau[5] =2
-
         if 40 and i < 60 and j > 290 and j <310 and piontableau[6]== 1 and (touche_ou_pas == 4 or touche_ou_pas == 6 or touche_ou_pas == 7 or touche_ou_pas == 9):
             if tour[0] %2 ==0:
                 cadre.create_oval(40,290,60,310,width=0,fill='blue')
@@ -338,7 +356,6 @@ def mouvement(event):
             else:
                 cadre.create_oval(40,290,60,310,width=0,fill='red')
                 piontableau[6] =2
-
         if i > 140 and i < 160 and j > 290 and j <310 and piontableau[7]== 1 and (touche_ou_pas == 6 or touche_ou_pas == 7 or touche_ou_pas == 8 or touche_ou_pas == 9):
             if tour[0] %2 ==0:
                 cadre.create_oval(140,290,160,310,width=0,fill='blue')
@@ -346,7 +363,6 @@ def mouvement(event):
             else:
                 cadre.create_oval(140,290,160,310,width=0,fill='red')
                 piontableau[7] =2
-        
         if i > 240 and i < 260 and j > 290 and j <310 and piontableau[8]== 1 and( touche_ou_pas == 5 or touche_ou_pas == 7 or touche_ou_pas == 8 or touche_ou_pas == 9):
             if tour[0] %2 ==0:
                 cadre.create_oval(240,290,260,310,width=0,fill='blue')
@@ -360,53 +376,9 @@ def mouvement(event):
             rouge_ou_bleu[0] =2
         prendre_poser[0]=0
         tour[0] += 1
-    print(rouge_ou_bleu)
-    print(piontableau)
-    print(touche_ou_pas)
 
 
-
-def cree_pion():
-    for i in range(3):
-        xt,yt=i%3*100+50,i//3*100
-        if i<3:yt+=50
-        cadre.create_oval(xt-3,yt-3,xt+3,yt+3,width=0,fill='red')
-    for i in range(12,15):
-        xt,yt=i%3*100+50,i//3*100
-        if i>11:yt-=50
-        cadre.create_oval(xt-3,yt-3,xt+3,yt+3,width=0,fill='blue')
-
-def tracePlateau():
-    cadre.create_rectangle(50,100,250,300,width=5)
-    cadre.create_line(50,100,250,300,width=5,fill='black')
-    cadre.create_line(50,300,250,100,width=5,fill='black')
-    cadre.create_line(50,200,250,200,width=5,fill='black')
-    cadre.create_line(150,100,150,300,width=5,fill='black')
-    for i in range(15):
-        xt,yt=i%3*100+50,i//3*100
-        if i<3:yt+=50
-        if i>11:yt-=50
-        cadre.create_oval(xt-7,yt-7,xt+7,yt+7,width=5,fill='black')
-        cadre.create_oval(xt-3,yt-3,xt+3,yt+3,width=0,fill='light yellow')
-
-    
-def coord(x, y):
-    return x , y
-
-def tour_joueur():
-    global tour
-    tour = [1]
-
-def pion_existant():
-    global piontableau
-    piontableau = [1,1,1,1,1,1,1,1,1]
-
-def moment_clic():
-    global prendre_poser
-    prendre_poser = [0]
-
-
-def partie_en_cours(piontableau):
+def partie_en_cours(piontableau):                                         #fonction détectant si 3 pions sont alignés ou non
     if piontableau[0] == piontableau[1] and piontableau[1] == piontableau[2] and piontableau[0] != 1 :
         return False
     elif piontableau[3] == piontableau[4] and piontableau[4] == piontableau[5] and piontableau[3] != 1:
@@ -426,8 +398,9 @@ def partie_en_cours(piontableau):
     else:
         return True
 
-def manche_placement(event):
-    i, j = coord(event.x, event.y)
+
+def manche_placement(event):                                   #fonction qui va faire déroulé toute les étapes d'un tour 
+    i, j = coord(event.x, event.y)                             #lors de la phase de placement
     if partie_en_cours(piontableau) and tour[0]<7:
         test_clic(event)
         if partie_en_cours(piontableau):
@@ -435,8 +408,9 @@ def manche_placement(event):
         else:
             recommencer_une_manche()
 
-def manche_deplacement(event):
-    i, j = coord(event.x, event.y)
+
+def manche_deplacement(event):                                #fonction qui va faire déroulé toute les étapes d'un tour
+    i, j = coord(event.x, event.y)                            #lors de la phase de déplacement
     if partie_en_cours(piontableau) and tour[0]>=7:
         mouvement(event)
         if partie_en_cours(piontableau):
@@ -445,7 +419,7 @@ def manche_deplacement(event):
             recommencer_une_manche()
 
 
-def recommencer_une_manche():
+def recommencer_une_manche():                                #fonction de fin de tour qui va attribuer les points et annoncer le vainqueur
     global nombre_manche
     global score1
     global score2
@@ -463,10 +437,10 @@ def recommencer_une_manche():
             print("le joueur 2 gagné")
             score2 += 1
     if score1 ==3:
-        label = Label(cadre, text='victoire du joueur 1')
+        label = Label(cadre, text='Victoire du Joueur 1')
         label.pack(ipadx=20, ipady=20)
     elif score2==3:
-        label = Label(cadre, text='victoire du joueur 2')
+        label = Label(cadre, text='Victoire du Joueur 2')
         label.pack(ipadx=20, ipady=20)
     else:
         cadre.create_rectangle(0,0,300,400,width=0,fill='white')
@@ -479,29 +453,15 @@ def recommencer_une_manche():
         piontableau = [1,1,1,1,1,1,1,1,1]
 
 
-
-def rond_qui_touche():
-    global touche_ou_pas
-    touche_ou_pas = 0
-
-def score_joueur():
-    global score1
-    global score2
-    global nombre_manche
-    nombre_manche = 1
-    score1 = 0
-    score2 = 0
-
-def fonc_label():
-    score1 = tk.StringVar()
-    aff2 = tk.StringVar()
-    label2 = Label(cadre2, text = 'le score du joueur 1 est de')
+def fonct_aff_score():                                        #fonction qui va afficher les scores
+    cadre2=tk.Canvas(fen, bg='white', width=50, height=50)
+    cadre3=tk.Canvas(fen, bg='white', width=50, height=50)
+    cadre2.grid(row=1,column=1,columnspan=1)
+    cadre3.grid(row=1,column=3,columnspan=1)
+    label2 = Label(cadre2, text = 'Le score du Joueur 1 est de :')
     label2.pack(ipadx=20, ipady=20)
-    label2 = Label(cadre3, text = 'le score du joueur 2 est de')
+    label2 = Label(cadre3, text = 'Le score du Joueur 2 est de :')
     label2.pack(ipadx=20, ipady=20)
-
-
-def fonct_aff_score():
     if score1 ==0:
         cadre4=tk.Canvas(fen, bg='white', width=20, height=20)
         cadre4.grid(row=2,column=1,columnspan=1)
@@ -535,21 +495,49 @@ def fonct_aff_score():
         cadre4.grid(row=2,column=1,columnspan=3)
         cadre4.create_text(10,10,text=3)
 
+###################################
+#fonction créé variables
+def tour_joueur():      #fonction pour la variable tour
+    global tour
+    tour = [1]
+
+
+def var_rouge_bleu():      #fonction pour la variable rouge_ou_bleu
+    global rouge_ou_bleu
+    rouge_ou_bleu =[2]
+
+
+def pion_existant():      #fonction pour la variable pionexistant
+    global piontableau
+    piontableau = [1,1,1,1,1,1,1,1,1]
+
+def moment_clic():        #fonction pour la variable prendre_poser
+    global prendre_poser
+    prendre_poser = [0]
+
+def rond_qui_touche():    #fonction pour la variable touche_ou_pas
+    global touche_ou_pas
+    touche_ou_pas = 0
+
+def score_joueur():     ##fonction pour la variable score_joueur
+    global score1
+    global score2
+    global nombre_manche
+    nombre_manche = 1
+    score1 = 0
+    score2 = 0
 
 
 ########################
 # programme principal
 fen = tk.Tk()
 fen.title('Tapatan')
+#créé le canvas
 cadre= tk.Canvas(fen, bg='white', width=Largeur, height=Hauteur)
 cadre.grid(row=5,column=1,columnspan=3)
-cadre2=tk.Canvas(fen, bg='white', width=50, height=50)
-cadre3=tk.Canvas(fen, bg='white', width=50, height=50)
-cadre2.grid(row=1,column=1,columnspan=1)
-cadre3.grid(row=1,column=3,columnspan=1)
+#fonction utilisé
 rond_qui_touche()
 score_joueur()
-fonc_label()
 var_rouge_bleu()
 tracePlateau()
 fonct_aff_score()
@@ -557,6 +545,7 @@ cree_pion()
 tour_joueur()
 pion_existant()
 moment_clic()
+#fonction on l'on utilise une touche
 cadre.bind("<Button-1>",manche_placement)
 cadre.bind("<Button-3>",manche_deplacement)
 fen.mainloop()
